@@ -1,5 +1,8 @@
 # KPConvert: 一个简单的将 psd 剪切蒙版快速转换为 kra 锁定透明度的小工具
 
+## 演示视频
+https://www.bilibili.com/video/BV1FNSFB9ELK
+
 ## 如何使用
 1. 用 krita 打开需要转换的 psd 文件
 ![alt text](https://github.com/nooblesone/nooblesone-img/blob/main/image/image.png?raw=true)
