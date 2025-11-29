@@ -1,0 +1,9 @@
+﻿<Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
+	<Application>
+		<Assembly Name="PsdSharp" >
+			<Type Name="PsdSharp.ImageResources.ResolutionInfo" Dynamic="Required All" />
+			<Type Name="PsdSharp.TaggedBlocks.LayerId" Dynamic="Required All" />
+		</Assembly>
+
+	</Application>
+</Directives>
