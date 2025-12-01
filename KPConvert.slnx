@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="KPConvert/KPConvert.csproj" />
+  <Project Path="TryWritePsd/TryWritePsd.csproj" Id="b668104b-4d7c-413c-9793-f0e44a62a62b" />
 </Solution>
