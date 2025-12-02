@@ -1,13 +1,17 @@
-﻿using System.Reflection.PortableExecutable;
+﻿using System;
+using System.Buffers.Binary;
+using System.Reflection.PortableExecutable;
 using System.Runtime.Serialization.Formatters;
 using System.Text;
-
+if(File.Exists("./test_converted.psd"))
+    File.Delete("./test_converted.psd");
 using FileStream psfs = new("./test.psd", FileMode.Open);
 
 using BinaryReader br = new(psfs);
 
 using FileStream psoutfs = new("./test_converted.psd", FileMode.CreateNew);
 using BinaryWriter bw = new(psoutfs);
+
 
 //for (int i = 0; i < 32; i++)
 //{
@@ -29,16 +33,17 @@ int layerandMaskInformationSectionHeadLength = 4;
 
 int layerandMaskInformationSectionLength;
 
+// 头部分
 for (int i = 0; i < headLength; i++)
 {
     var by = br.ReadByte();
     bw.Write(by);
 }
 
-bw.Flush();
 
+// 
 var by2 = br.ReadBytes(colorModeDataSectionHeadLength);
-colorModeDataSectionLength = BitConverter.ToInt32(by2);
+colorModeDataSectionLength = BinaryPrimitives.ReadInt32BigEndian(by2);
 bw.Write(by2);
 for (int i = 0; i < colorModeDataSectionLength; i++)
 {
@@ -46,12 +51,12 @@ for (int i = 0; i < colorModeDataSectionLength; i++)
     bw.Write(by);
 }
 
-bw.Flush();
+
 
 
 
 var by3 = br.ReadBytes(imageResourcesSectionHeadLength);
-imageResourcesSectionLength = BitConverter.ToInt32(by2);
+imageResourcesSectionLength = BinaryPrimitives.ReadInt32BigEndian(by3);
 bw.Write(by3);
 for (int i = 0; i < imageResourcesSectionLength; i++)
 {
@@ -59,11 +64,11 @@ for (int i = 0; i < imageResourcesSectionLength; i++)
     bw.Write(by);
 }
 
-bw.Flush();
 
 
+// 主要处理的部分
 var by4 = br.ReadBytes(layerandMaskInformationSectionHeadLength);
-layerandMaskInformationSectionLength = BitConverter.ToInt32(by2);
+layerandMaskInformationSectionLength = BinaryPrimitives.ReadInt32BigEndian(by4);
 bw.Write(by4);
 for (int i = 0; i < layerandMaskInformationSectionLength; i++)
 {
@@ -71,13 +76,14 @@ for (int i = 0; i < layerandMaskInformationSectionLength; i++)
     bw.Write(by);
 }
 
-bw.Flush();
 
-while (br.BaseStream.Position < br.BaseStream.Length) 
+
+int size = 64 * 1024;
+var buffer = new byte[size];
+int bytesRead;
+while ((bytesRead = br.Read(buffer, 0, buffer.Length)) > 0)
 {
-    byte data = br.ReadByte();
-    // 处理数据
-    bw.Write(data);
+    bw.Write(buffer, 0, bytesRead);
 }
 
-bw.Flush();
+
