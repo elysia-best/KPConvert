@@ -19,12 +19,6 @@ using FileStream psoutfs = new("./test_converted.psd", FileMode.CreateNew);
 using BinaryWriter bw = new(psoutfs);
 
 
-//for (int i = 0; i < 32; i++)
-//{
-//    var by = br.ReadBytes(4);
-//    var bys = Encoding.Latin1.GetString(by);
-//    Console.WriteLine(bys);
-//}
 int headLength = 26;
 
 int colorModeDataSectionHeadLength = 4;
