@@ -1,0 +1,47 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            runtime: linux-x64
+          - os: windows-latest
+            runtime: win-x64
+          - os: macos-latest
+            runtime: osx-x64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0. x'
+
+    - name: Restore dependencies
+      run: dotnet restore KPConvert.slnx
+
+    - name: Build
+      run: dotnet build KPConvert.slnx --configuration Release --no-restore
+
+    - name: Publish
+      run: dotnet publish KPConvert/KPConvert. csproj --configuration Release --runtime ${{ matrix.runtime }} --self-contained true -o ./publish/${{ matrix.runtime }}
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: KPConvert-${{ matrix.runtime }}
+        path: ./publish/${{ matrix. runtime }}
