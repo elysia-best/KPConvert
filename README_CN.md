@@ -44,7 +44,7 @@ https://www.bilibili.com/video/BV1FNSFB9ELK
    
 ![alt text](https://raw.githubusercontent.com/nooblesone/nooblesone-img/main/image/20251203181503.png)
 
-程序退出，可以看到已经生成了 `filename_converted.kra` 文件，使用支持剪切蒙版的软件打开，查看结果
+程序退出，可以看到已经生成了 `filename_converted.psd` 文件，使用支持剪切蒙版的软件打开，查看结果
 
 ![alt text](https://raw.githubusercontent.com/nooblesone/nooblesone-img/main/image/20251203184740.png)
 

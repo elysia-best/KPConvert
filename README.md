@@ -44,7 +44,7 @@ Illustration by: 墨帧Studio <a>https://space.bilibili.com/2137267072</a>
    
 ![alt text](https://raw.githubusercontent.com/nooblesone/nooblesone-img/main/image/20251203181503.png)
 
-After the program exits, you will see that a `filename_converted.kra` file has been generated. Open it with software that supports clipping masks to view the result.
+After the program exits, you will see that a `filename_converted.psd` file has been generated. Open it with software that supports clipping masks to view the result.
 
 ![alt text](https://raw.githubusercontent.com/nooblesone/nooblesone-img/main/image/20251203184740.png)
 
